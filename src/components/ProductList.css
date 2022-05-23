@@ -3,3 +3,7 @@
     grid-template-columns: auto auto auto;
     grid-template-rows: 250px;
 }
+
+.Product-list-button {
+    margin: 10px;
+}

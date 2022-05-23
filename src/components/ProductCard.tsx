@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React from "react";
 import { Product } from "../types";
 import "./ProductCard.css";
@@ -10,17 +11,18 @@ export default function ProductCard(props: {
 
   return (
     <div className="Product-card">
-      <div>{product.name}</div>
-      <div>{product.description}</div>
-      <div>{product.status}</div>
-      <div>
-        <button
+      <div className="Product-card-field">{product.name}</div>
+      <div className="Product-card-field">{product.description}</div>
+      <div className="Product-card-field">{product.status}</div>
+      <div className="Product-card-field">
+        <Button
+          variant="contained"
           onClick={(event) => {
             props.editProduct(product);
           }}
         >
           Edit
-        </button>
+        </Button>
       </div>
     </div>
   );

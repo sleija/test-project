@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Product } from "../types";
 import ProductCard from "./ProductCard";
@@ -52,9 +53,11 @@ export default function ProductList(): JSX.Element {
       )}
       {!addEditMode && (
         <div>
-          <button type="button" onClick={addProduct}>
-            Add
-          </button>
+          <div className="Product-list-button">
+            <Button variant="contained" onClick={addProduct}>
+              Add Product
+            </Button>
+          </div>
           <div className="Product-list">
             {products.map((p) => (
               <ProductCard
