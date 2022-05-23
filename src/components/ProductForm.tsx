@@ -1,3 +1,4 @@
+import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Product, ProductStatus } from "../types";
 
@@ -25,7 +26,7 @@ export default function ProductForm(props: {
     setProduct({ ...product, description: newDescription });
   }
 
-  const handleSubmit = async () => {
+  const saveProduct = async () => {
     const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}product`, {
       method: "POST",
       headers: new Headers({
@@ -40,19 +41,30 @@ export default function ProductForm(props: {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Name:
-        <input type="text" value={product.name} onChange={handleNameChange} />
-      </label>
-      <label>
-        Description:
-        <textarea
-          value={product.description}
-          onChange={handleDescriptionChange}
-        />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+    <div>
+      <TextField
+        sx={{ m: 2 }}
+        id="outlined-basic"
+        label="Name"
+        variant="outlined"
+        value={product.name}
+        onChange={handleNameChange}
+      />
+      <br />
+      <TextField
+        sx={{ m: 2, width: "75ch" }}
+        id="outlined-basic"
+        label="Description"
+        variant="outlined"
+        value={product.description}
+        onChange={handleDescriptionChange}
+        multiline
+        minRows={5}
+      />
+      <br />
+      <Button sx={{ m: 2 }} variant="contained" onClick={saveProduct}>
+        Save Product
+      </Button>
+    </div>
   );
 }

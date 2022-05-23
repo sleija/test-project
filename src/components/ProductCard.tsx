@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Card } from "@mui/material";
 import React from "react";
 import { Product } from "../types";
 import "./ProductCard.css";
@@ -10,7 +10,7 @@ export default function ProductCard(props: {
   const product = props.product;
 
   return (
-    <div className="Product-card">
+    <Card sx={{ m: 2 }}>
       <div className="Product-card-field">{product.name}</div>
       <div className="Product-card-field">{product.description}</div>
       <div className="Product-card-field">{product.status}</div>
@@ -24,6 +24,6 @@ export default function ProductCard(props: {
           Edit
         </Button>
       </div>
-    </div>
+    </Card>
   );
 }
