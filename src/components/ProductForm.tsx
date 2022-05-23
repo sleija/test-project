@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import React, { useState } from "react";
 import { Product, ProductStatus } from "../types";
 
@@ -9,6 +9,7 @@ export default function ProductForm(props: {
   const productToAdd: Product = {
     name: "",
     description: "",
+    price: 0,
     status: ProductStatus.Active,
   };
 
@@ -24,6 +25,19 @@ export default function ProductForm(props: {
   function handleDescriptionChange(event: { target: { value: string } }) {
     const newDescription: string = event.target.value as string;
     setProduct({ ...product, description: newDescription });
+  }
+
+  function handlePriceChange(event: { target: { value: string } }) {
+    const newPrice: number = parseFloat(event.target.value);
+    setProduct({ ...product, price: newPrice });
+  }
+
+  function handleStatusChange(event: { target: { value: string } }) {
+    let newStatus =
+      product.status === ProductStatus.Active
+        ? ProductStatus.Inactive
+        : ProductStatus.Active;
+    setProduct({ ...product, status: newStatus });
   }
 
   const saveProduct = async () => {
@@ -60,6 +74,27 @@ export default function ProductForm(props: {
         onChange={handleDescriptionChange}
         multiline
         minRows={5}
+      />
+      <br />
+      <TextField
+        sx={{ m: 2 }}
+        id="outlined-basic"
+        label="Price"
+        variant="outlined"
+        value={product.price}
+        onChange={handlePriceChange}
+        type="number"
+      />
+      <br />
+      <FormControlLabel
+        sx={{ m: 2 }}
+        control={
+          <Checkbox
+            checked={product.status === ProductStatus.Active}
+            onChange={handleStatusChange}
+          />
+        }
+        label="Active"
       />
       <br />
       <Button sx={{ m: 2 }} variant="contained" onClick={saveProduct}>
