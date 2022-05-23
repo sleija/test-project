@@ -100,6 +100,15 @@ export default function ProductForm(props: {
       <Button sx={{ m: 2 }} variant="contained" onClick={saveProduct}>
         Save Product
       </Button>
+      <Button
+        sx={{ m: 2 }}
+        variant="contained"
+        onClick={(event) => {
+          props.productSaved(undefined);
+        }}
+      >
+        Cancel
+      </Button>
     </div>
   );
 }

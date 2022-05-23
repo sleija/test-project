@@ -22,13 +22,17 @@ export default function ProductList(): JSX.Element {
   }
 
   function productSaved(product: Product) {
-    if (productToEdit) {
-      setProductToEdit(undefined);
-      const ndx = products.findIndex((p) => p.productId === product.productId);
-      products[ndx] = product;
-      setProducts([...products]);
-    } else {
-      setProducts([...products, product]);
+    if (product) {
+      if (productToEdit) {
+        setProductToEdit(undefined);
+        const ndx = products.findIndex(
+          (p) => p.productId === product.productId
+        );
+        products[ndx] = product;
+        setProducts([...products]);
+      } else {
+        setProducts([...products, product]);
+      }
     }
     setAddEditMode(false);
   }
