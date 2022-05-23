@@ -5,22 +5,6 @@ import ProductForm from "./ProductForm";
 import "./ProductList.css";
 
 export default function ProductList(): JSX.Element {
-  // const products_old: Product[] = [
-  //   {
-  //     id: 5,
-  //     name: "Water Bottle",
-  //     description:
-  //       "A erat nam at lectus. Suspendisse sed nisi lacus sed viverra. Nisl condimentum id venenatis a.",
-  //     price: 15,
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "Workout Shorts",
-  //     description: "Eu non diam phasellus vestibulum lorem sed.",
-  //     price: 25,
-  //   },
-  // ];
-
   const [products, setProducts] = useState<Product[]>([]);
   const [addEditMode, setAddEditMode] = useState(false);
   const [productToEdit, setProductToEdit] = useState<Product>();
@@ -48,7 +32,7 @@ export default function ProductList(): JSX.Element {
 
   useEffect(() => {
     const getAllProducts = async () => {
-      const res = await fetch("http://localhost:3009/v1/product");
+      const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}product`);
       if (res.ok) {
         const json = await res.json();
         setProducts(json);

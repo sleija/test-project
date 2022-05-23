@@ -26,7 +26,7 @@ export default function ProductForm(props: {
   }
 
   const handleSubmit = async () => {
-    const res = await fetch("http://localhost:3009/v1/product", {
+    const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}product`, {
       method: "POST",
       headers: new Headers({
         "Content-type": "application/json; charset=UTF-8",
