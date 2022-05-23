@@ -1,5 +1,5 @@
 import React from "react";
-import { Product } from "../App";
+import { Product } from "../types";
 import "./ProductCard.css";
 
 export default function ProductCard(props: { product: Product }): JSX.Element {
