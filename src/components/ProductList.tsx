@@ -29,10 +29,10 @@ export default function ProductList(): JSX.Element {
     setAddEditMode(true);
   }
 
-  // function editProduct(product: Product) {
-  //   setProductToEdit(product);
-  //   setAddEditMode(true);
-  // }
+  function editProduct(product: Product) {
+    setProductToEdit(product);
+    setAddEditMode(true);
+  }
 
   function productSaved(product: Product) {
     if (productToEdit) {
@@ -47,7 +47,6 @@ export default function ProductList(): JSX.Element {
   }
 
   useEffect(() => {
-    // declare the data fetching function
     const getAllProducts = async () => {
       const res = await fetch("http://localhost:3009/v1/product");
       if (res.ok) {
@@ -74,7 +73,11 @@ export default function ProductList(): JSX.Element {
           </button>
           <div className="Product-list">
             {products.map((p) => (
-              <ProductCard product={p} key={p.productId}></ProductCard>
+              <ProductCard
+                key={p.productId}
+                product={p}
+                editProduct={editProduct}
+              ></ProductCard>
             ))}
           </div>
         </div>
