@@ -13,6 +13,7 @@ export default function ProductList(): JSX.Element {
   const [showActiveOnly, setShowActiveOnly] = useState(false);
 
   function addProduct() {
+    setProductToEdit(undefined);
     setAddEditMode(true);
   }
 
