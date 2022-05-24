@@ -14,7 +14,9 @@ export default function ProductCard(props: {
       <div className="Product-card-field">{product.name}</div>
       <div className="Product-card-field">{product.description}</div>
       <div className="Product-card-field">${product.price}</div>
-      <div className="Product-card-field">{product.status}</div>
+      <div className="Product-card-field">
+        {product.active ? "Active" : "Inactive"}
+      </div>
       <div className="Product-card-field">
         <Button
           variant="contained"

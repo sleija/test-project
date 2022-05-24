@@ -1,6 +1,6 @@
 import { Button, Checkbox, FormControlLabel } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Product, ProductStatus } from "../types";
+import { Product } from "../types";
 import ProductCard from "./ProductCard";
 import ProductForm from "./ProductForm";
 import "./ProductList.css";
@@ -42,9 +42,7 @@ export default function ProductList(): JSX.Element {
     const newShowActiveOnly = !showActiveOnly;
     setShowActiveOnly(newShowActiveOnly);
     if (newShowActiveOnly) {
-      setProductsToShow(
-        products.filter((p) => p.status === ProductStatus.Active)
-      );
+      setProductsToShow(products.filter((p) => p.active));
     } else {
       setProductsToShow(products);
     }

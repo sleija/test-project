@@ -1,6 +1,6 @@
 import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import React, { useState } from "react";
-import { Product, ProductStatus } from "../types";
+import { Product } from "../types";
 
 export default function ProductForm(props: {
   productToEdit?: Product;
@@ -10,7 +10,7 @@ export default function ProductForm(props: {
     name: "",
     description: "",
     price: 0,
-    status: ProductStatus.Active,
+    active: true,
   };
 
   const [product, setProduct] = useState<Product>(
@@ -33,11 +33,7 @@ export default function ProductForm(props: {
   }
 
   function handleStatusChange(event: { target: { value: string } }) {
-    let newStatus =
-      product.status === ProductStatus.Active
-        ? ProductStatus.Inactive
-        : ProductStatus.Active;
-    setProduct({ ...product, status: newStatus });
+    setProduct({ ...product, active: !product.active });
   }
 
   const saveProduct = async () => {
@@ -89,10 +85,7 @@ export default function ProductForm(props: {
       <FormControlLabel
         sx={{ m: 2 }}
         control={
-          <Checkbox
-            checked={product.status === ProductStatus.Active}
-            onChange={handleStatusChange}
-          />
+          <Checkbox checked={product.active} onChange={handleStatusChange} />
         }
         label="Active"
       />
