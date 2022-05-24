@@ -7,10 +7,12 @@ import "./ProductList.css";
 
 export default function ProductList(): JSX.Element {
   const [products, setProducts] = useState<Product[]>([]);
-  const [productsToShow, setProductsToShow] = useState<Product[]>([]);
   const [addEditMode, setAddEditMode] = useState(false);
   const [productToEdit, setProductToEdit] = useState<Product>();
   const [showActiveOnly, setShowActiveOnly] = useState(false);
+  const productsToShow = showActiveOnly
+    ? products.filter((p) => p.active)
+    : products;
 
   function addProduct() {
     setProductToEdit(undefined);
@@ -39,13 +41,7 @@ export default function ProductList(): JSX.Element {
   }
 
   function handleShowActiveOnly(event: any) {
-    const newShowActiveOnly = !showActiveOnly;
-    setShowActiveOnly(newShowActiveOnly);
-    if (newShowActiveOnly) {
-      setProductsToShow(products.filter((p) => p.active));
-    } else {
-      setProductsToShow(products);
-    }
+    setShowActiveOnly(!showActiveOnly);
   }
 
   useEffect(() => {
@@ -54,7 +50,6 @@ export default function ProductList(): JSX.Element {
       if (res.ok) {
         const json = await res.json();
         setProducts(json);
-        setProductsToShow(json);
       }
     };
 
