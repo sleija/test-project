@@ -17,25 +17,6 @@ export default function ProductForm(props: {
     props.productToEdit || productToAdd
   );
 
-  function handleNameChange(event: { target: { value: string } }) {
-    const newName: string = event.target.value as string;
-    setProduct({ ...product, name: newName });
-  }
-
-  function handleDescriptionChange(event: { target: { value: string } }) {
-    const newDescription: string = event.target.value as string;
-    setProduct({ ...product, description: newDescription });
-  }
-
-  function handlePriceChange(event: { target: { value: string } }) {
-    const newPrice: number = parseFloat(event.target.value);
-    setProduct({ ...product, price: newPrice });
-  }
-
-  function handleStatusChange(event: { target: { value: string } }) {
-    setProduct({ ...product, active: !product.active });
-  }
-
   const saveProduct = async () => {
     const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}product`, {
       method: "POST",
@@ -58,7 +39,7 @@ export default function ProductForm(props: {
         label="Name"
         variant="outlined"
         value={product.name}
-        onChange={handleNameChange}
+        onChange={(e) => setProduct({ ...product, name: e.target.value })}
       />
       <br />
       <TextField
@@ -67,7 +48,9 @@ export default function ProductForm(props: {
         label="Description"
         variant="outlined"
         value={product.description}
-        onChange={handleDescriptionChange}
+        onChange={(e) =>
+          setProduct({ ...product, description: e.target.value })
+        }
         multiline
         minRows={5}
       />
@@ -78,14 +61,21 @@ export default function ProductForm(props: {
         label="Price"
         variant="outlined"
         value={product.price}
-        onChange={handlePriceChange}
+        onChange={(e) =>
+          setProduct({ ...product, price: parseFloat(e.target.value) })
+        }
         type="number"
       />
       <br />
       <FormControlLabel
         sx={{ m: 2 }}
         control={
-          <Checkbox checked={product.active} onChange={handleStatusChange} />
+          <Checkbox
+            checked={product.active}
+            onChange={(e) =>
+              setProduct({ ...product, active: !product.active })
+            }
+          />
         }
         label="Active"
       />
